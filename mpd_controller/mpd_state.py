@@ -47,7 +47,7 @@ def get_state(client, cover_art_temp):
     print_state(artist, album, song_title, mpd_status)
     # send message
     title = icon + '\t' + artist
-    message = album + "-" + song_title
+    message = album + " - " + song_title
     subprocess.call(['notify-send', title, message, '-i', cover_art_temp])
     return
 
