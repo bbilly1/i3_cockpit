@@ -1,10 +1,4 @@
-#!/usr/bin/env python3
-# https://python-mpd2.readthedocs.io/en/latest
-
-import sys
-from mpd import MPDClient
 from time import sleep
-
 
 def fade(way, current_vol, client):
     """ gracefull fading """
@@ -19,10 +13,9 @@ def fade(way, current_vol, client):
         sleep(0.03)
 
 
-def mpc_toggle():
+def toggle(client):
     """ toggles play status """
-    client = MPDClient()
-    client.connect("localhost", 6600)
+    # setup
     client_status = client.status()
     # switch
     current_vol = int(client_status['volume'])
@@ -33,14 +26,4 @@ def mpc_toggle():
         client.setvol(0)
         client.play()
         fade('in', current_vol, client)
-
-
-def main():
-    """ main parser for args """
-    mpc_command = sys.argv[1]
-    if mpc_command == 'toggle':
-        mpc_toggle()
-
-
-if __name__ == '__main__':
-    main()
+    
