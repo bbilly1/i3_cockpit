@@ -23,3 +23,17 @@ None standard Python dependencies:
 
 ### Additional:
 `notify-send` will get called via subprocess, works best with [Dunst](https://dunst-project.org/documentation/) to show current song playing with cover art extracted from metadata.
+
+
+## i3block_shell
+A bunch of simple bash scripts to be called via i3blocks.
+* date.sh: Echos the current date
+    * on left click: uses notify-send to print current three month calendar
+* df.sh: Echos current diskfree level of the root partition
+    * on left click: uses notify-send to print the df of all relevant connected partitions
+* ip.sh: Echos current ip addresses in use or inactive when offline
+* updates.sh: Echos how many updates are pending.
+    * on left click: echos the complete list of all pending updates
+    * on right click: refreshes the current pending updates and echos result
+* wifiinfo.sh: Echos current db level of signal strength.
+    * on left click: Uses nmcli to echo all device status
