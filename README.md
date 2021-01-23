@@ -1,0 +1,1 @@
+This is a loose collection of scripts related to i3 and i3blocks
