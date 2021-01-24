@@ -39,3 +39,21 @@ A bunch of simple bash scripts to be called via i3blocks.
     * on right click: refreshes the current pending updates and echos result
 * **wifiinfo.sh**: Echos current db level of signal strength.
     * on left click: Uses nmcli to echo all device status
+
+
+## weather_applet
+Standalone script that pulls weather data from [openweathermap.org](https://openweathermap.org/) and prints out 
+current temparature and weather. Meant to be used from i3blocks.
+
+### Config:
+Get your free openweathermap API key from [here](https://home.openweathermap.org/api_keys).  
+Create a file called *config* in the same directory as the *weather.py* script and copy the sample 
+data from *config.sample*:
+* Replace the dummy *openweathermap_api_key* with your key.
+* Add *lat* and *lon* values with the latitude and longitude values from your location.
+
+### Install:
+None standard Python dependencies:
+**python-requests** [requests](https://requests.readthedocs.io/en/master/)
+* On Arch: `sudo pacman -S python-requests`
+* Via Pip: `pip install requests`
