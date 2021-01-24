@@ -1,0 +1,5 @@
+# replace with your values and remove .sample from filename
+[api]
+openweathermap_api_key = aaaa1111aaaa1111aaaa1111aaaa1111
+lat = 40.71
+lon = -74.00
