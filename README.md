@@ -43,7 +43,8 @@ A bunch of simple bash scripts to be called via i3blocks.
 
 ## weather_applet
 Standalone script that pulls weather data from [openweathermap.org](https://openweathermap.org/) and prints out 
-current temparature and weather. Meant to be used from i3blocks.
+current temperature and weather. Meant to be used from i3blocks.  
+Icons used to display the current weather condition are from [fontawesome.com](https://fontawesome.com/).
 
 ### Config:
 Get your free openweathermap API key from [here](https://home.openweathermap.org/api_keys).  
@@ -57,3 +58,7 @@ None standard Python dependencies:
 **python-requests** [requests](https://requests.readthedocs.io/en/master/)
 * On Arch: `sudo pacman -S python-requests`
 * Via Pip: `pip install requests`
+
+Fontawesome font pakage:
+* On Arch: `sudo pacman -S ttf-font-awesome`
+* On Ubuntu: `sudo apt install fonts-font-awesome`
