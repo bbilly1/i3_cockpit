@@ -3,6 +3,7 @@
 # https://dunst-project.org/documentation/
 
 import sys
+import subprocess
 from mpd import MPDClient
 
 import mpd_playback
@@ -20,13 +21,23 @@ elif len(arguments) == 2:
 
 
 def main():
-    # connect
+    """ 
+    establish connection to daemon 
+    then process the command and close at end 
+    """
+    client = MPDClient()
+    # try to connect, if error try to start daemon
     try:
-        client = MPDClient()
         client.connect("localhost", 6600)
     except ConnectionRefusedError:
-        # mpd is not running, stop here
-        return
+        # mpd is not connecting, try to start
+        output = subprocess.run(["mpd"], capture_output=True)
+        if output.returncode == 0:
+            # connect
+            client.connect("localhost", 6600)
+        else:
+            # that failed, all is lost
+            return
     # follow mpc_command
     if mpc_command == 'toggle':
         mpd_playback.toggle(client, signal_id)

@@ -6,6 +6,8 @@ but can also be called via the media keys on your keyboard.
 
 ### how to use
 The main file is **mpd_main.py**, called without arguments, it will just output the current status.  
+The script expects mpd to be running on localhost:6600, and will try to start the daemon  
+if it looks like it is not running already.
 Additionaly the following arguments can be passed:
 
 * **toggle**: if mpd is playing, it will pause, if is paused it will resume
@@ -17,9 +19,9 @@ in mpd_main.py edit *signal_id* to change to the id used in your i3blocks.conf f
 
 ### Install:
 None standard Python dependencies:
-**python-mpd** Link [python-mpd](https://pypi.org/project/python-mpd/)
+**python-mpd** [python-mpd2](https://pypi.org/project/python-mpd2/)
 * On Arch: `sudo pacman -S python-mpd2`
-* Via Pip: `pip install python-mpd`
+* Via Pip: `pip install python-mpd2`
 
 ### Additional:
 `notify-send` will get called via subprocess, works best with [Dunst](https://dunst-project.org/documentation/) to show current song playing with cover art extracted from metadata.
@@ -27,13 +29,13 @@ None standard Python dependencies:
 
 ## i3block_shell
 A bunch of simple bash scripts to be called via i3blocks.
-* date.sh: Echos the current date
+* **date.sh**: Echos the current date
     * on left click: uses notify-send to print current three month calendar
-* df.sh: Echos current diskfree level of the root partition
+* **df.sh**: Echos current diskfree level of the root partition
     * on left click: uses notify-send to print the df of all relevant connected partitions
-* ip.sh: Echos current ip addresses in use or inactive when offline
-* updates.sh: Echos how many updates are pending.
+* **ip.sh**: Echos current ip addresses in use or inactive when offline
+* **updates.sh**: Echos how many updates are pending.
     * on left click: echos the complete list of all pending updates
     * on right click: refreshes the current pending updates and echos result
-* wifiinfo.sh: Echos current db level of signal strength.
+* **wifiinfo.sh**: Echos current db level of signal strength.
     * on left click: Uses nmcli to echo all device status
