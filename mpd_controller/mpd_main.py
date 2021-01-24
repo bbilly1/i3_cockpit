@@ -31,13 +31,14 @@ def main():
         client.connect("localhost", 6600)
     except ConnectionRefusedError:
         # mpd is not connecting, try to start
-        output = subprocess.run(["mpd"], capture_output=True)
-        if output.returncode == 0:
-            # connect
-            client.connect("localhost", 6600)
-        else:
-            # that failed, all is lost
-            return
+        if mpc_command == 'toggle':
+            output = subprocess.run(["mpd"], capture_output=True)
+            if output.returncode == 0:
+                # connect
+                client.connect("localhost", 6600)
+            else:
+                # that failed, all is lost
+                return
     # follow mpc_command
     if mpc_command == 'toggle':
         mpd_playback.toggle(client, signal_id)
