@@ -29,6 +29,7 @@ None standard Python dependencies:
 
 ## i3block_shell
 A bunch of simple bash scripts to be called via i3blocks.
+* **coretemp.sh** Echos average temperature of all CPU cores by parsing output of `sensors` from package *lm_sensors*
 * **date.sh**: Echos the current date
     * on left click: uses notify-send to print current three month calendar
 * **df.sh**: Echos current diskfree level of the root partition
