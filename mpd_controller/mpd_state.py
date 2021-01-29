@@ -1,4 +1,4 @@
-
+""" prints the state of mpd to use as a notification """
 import subprocess
 
 
@@ -17,10 +17,9 @@ def print_state(artist, album, song_title, mpd_status):
     print(print_main)
     print(print_small)
     print(print_color)
-    return
 
 
-def get_state(client, cover_art_temp):
+def get_state(client, cover_art_path):
     """ sends a notification of the current status """
     # read out status from client
     now_playing = client.currentsong()
@@ -31,12 +30,12 @@ def get_state(client, cover_art_temp):
     album = now_playing['album']
     song_title = now_playing['title']
     # try to write cover art to temp file
+    cover_art_blob = client.readpicture(music_file)
     try:
-        cover_art = client.readpicture(music_file)
-        with open(cover_art_temp, 'w+b') as f:
-            f.write(cover_art['binary'])
-    except:
-        cover_art = False
+        with open(cover_art_path, 'w+b') as cover_file:
+            cover_file.write(cover_art_blob['binary'])
+    except KeyError:
+        cover_art_blob = False
     # set player status icon
     mpd_status = client_status['state']
     if mpd_status == 'play':
@@ -48,6 +47,4 @@ def get_state(client, cover_art_temp):
     # send message
     title = icon + '\t' + artist
     message = album + " - " + song_title
-    subprocess.call(['notify-send', title, message, '-i', cover_art_temp])
-    return
-
+    subprocess.call(['notify-send', title, message, '-i', cover_art_path])

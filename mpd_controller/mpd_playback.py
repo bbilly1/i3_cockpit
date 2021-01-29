@@ -1,3 +1,4 @@
+""" handles the play interactions with mpd """
 from time import sleep
 import subprocess
 
@@ -9,7 +10,7 @@ def fade(way, current_vol, client):
     elif way == 'in':
         steps = 50
         amount = +2
-    for i in range(steps):
+    for _ in range(steps):
         client.volume(amount)
         sleep(0.03)
 
@@ -29,7 +30,7 @@ def toggle(client, signal_id):
         fade('in', current_vol, client)
     # call pkill to refresh status bar
     subprocess.call(["pkill", "-RTMIN+" + str(signal_id), "i3blocks"])
-    
+
 
 def play_next(client):
     """ skip to next in playlist """
@@ -49,4 +50,3 @@ def play_prev(client):
     client.pause()
     client.setvol(current_vol)
     client.previous()
-
