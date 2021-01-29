@@ -27,6 +27,15 @@ None standard Python dependencies:
 `notify-send` will get called via subprocess, works best with [Dunst](https://dunst-project.org/documentation/) to show current song playing with cover art extracted from metadata.
 
 
+## i3block_py
+A collection of standalone python scripts for the slightly more complicated things.  
+* **energy.py**: parses `acpi` to output current battery status. Uses `notify-send` to send messages on changes.
+* **cpu.py**: parses `/proc/loadavg` to output load average values for last 1, last 5 and last 15 min.
+    * call `cpu.py 1` to get the avg from last min
+    * call `cpu.py 5` to get the avg from last 5 min
+    * call `cpu.py 15` to get the avg from last 15 min
+
+
 ## i3block_shell
 A bunch of simple bash scripts to be called via i3blocks.
 * **coretemp.sh**: Echos average temperature of all CPU cores by parsing output of `sensors` from package *lm_sensors*, uses icons from [fontawesome.com](https://fontawesome.com/).
@@ -41,13 +50,6 @@ A bunch of simple bash scripts to be called via i3blocks.
 * **wifiinfo.sh**: Echos current db level of signal strength.
     * on left click: Uses nmcli to echo all device status.
 
-## i3block_py
-A collection of standalone python scripts for the slightly more complicated things.  
-* **energy.py**: parses `acpi` to output current battery status. Uses `notify-send` to send messages on changes.
-* **cpy.py**: parses `/proc/loadavg` to output load average values for last 1, last 5 and last 15 min.
-    * call `cpy.py 1` to get the avg from last min
-    * call `cpy.py 5` to get the avg from last 5 min
-    * call `cpy.py 15` to get the avg from last 15 min
 
 ## weather_applet
 Standalone script that pulls weather data from [openweathermap.org](https://openweathermap.org/) and prints out 
