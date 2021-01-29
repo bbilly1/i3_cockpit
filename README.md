@@ -41,6 +41,9 @@ A bunch of simple bash scripts to be called via i3blocks.
 * **wifiinfo.sh**: Echos current db level of signal strength.
     * on left click: Uses nmcli to echo all device status.
 
+## i3block_py
+A collection of standalone python scripts for the slightly more complicated things.  
+* **energy.py**: parses `acpi` to output current battery status. Uses `notify-send` to send messages on changes.
 
 ## weather_applet
 Standalone script that pulls weather data from [openweathermap.org](https://openweathermap.org/) and prints out 
