@@ -1,9 +1,12 @@
 #!/usr/bin/env python3
+""" queries openweathermap to get weather data """
+
+import os
+import sys
+import configparser
+from time import sleep
 
 import requests
-from time import sleep
-import configparser
-import sys, os
 
 
 iconlist = {
@@ -34,13 +37,13 @@ def get_config(config_path):
     config_parser = configparser.ConfigParser()
     config_parser.read(config_path)
     # return false on error
-    if config_parser.options('api') != ['openweathermap_api_key', 'lat', 'lon']:
-        print('config parse error')
-        return False
-    else:
+    if config_parser.options('api') == ['openweathermap_api_key', 'lat', 'lon']:
         api_key = config_parser.get('api', 'openweathermap_api_key')
         lat = config_parser.get('api', 'lat')
         lon = config_parser.get('api', 'lon')
+    else:
+        print('config parse error')
+        return False
     return api_key, lat, lon
 
 
@@ -51,17 +54,17 @@ def get_data(api_key, lat, lon):
     # try up to 3 times
     for i in range(1, 4):
         try:
-            r = requests.get(url, timeout=5)
+            response = requests.get(url, timeout=5)
         except:
             sleep(int(i) * 30)
         else:
             break
     # parse response
-    json = r.json()
+    json = response.json()
     celsius = round(json['main']['temp'])
     celsius_pretty = str(celsius) + "°"
-    icon_ID = json['weather'][0]['icon']
-    icon = iconlist.get(icon_ID)
+    icon_id = json['weather'][0]['icon']
+    icon = iconlist.get(icon_id)
     # return
     return celsius_pretty, icon
 
@@ -82,4 +85,3 @@ def main():
 # start from here
 if __name__ == '__main__':
     main()
-
