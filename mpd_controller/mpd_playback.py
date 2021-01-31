@@ -36,9 +36,12 @@ def play_next(client):
     """ skip to next in playlist """
     client_status = client.status()
     current_vol = int(client_status['volume'])
-    fade('out', current_vol, client)
-    client.pause()
-    client.setvol(current_vol)
+    if current_vol > 0:
+        fade('out', current_vol, client)
+        client.pause()
+        client.setvol(current_vol)
+    else:
+        client.setvol(100)
     client.next()
 
 
@@ -46,7 +49,10 @@ def play_prev(client):
     """ skip to previous in playlist """
     client_status = client.status()
     current_vol = int(client_status['volume'])
-    fade('out', current_vol, client)
-    client.pause()
-    client.setvol(current_vol)
+    if current_vol > 0:
+        fade('out', current_vol, client)
+        client.pause()
+        client.setvol(current_vol)
+    else:
+        client.setvol(100)
     client.previous()
