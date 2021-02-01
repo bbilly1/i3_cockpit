@@ -68,12 +68,16 @@ def get_last_log(battery_state, time_remaining):
         # no log file on first run
         return time_remaining, new_line
     # get lines
-    log_lines_clean = [i.strip() for i in log_lines]
-    last_10 = [i.split() for i in log_lines_clean]
-    min_list = [int(i[1]) for i in last_10[-2:]]
-    min_list.append(time_remaining)
-    # calc avg
-    avg_min = int(sum(min_list) / len(min_list))
+    try:
+        log_lines_clean = [i.strip() for i in log_lines]
+        last_10 = [i.split() for i in log_lines_clean]
+        min_list = [int(i[1]) for i in last_10[-2:]]
+        min_list.append(time_remaining)
+        # calc avg
+        avg_min = int(sum(min_list) / len(min_list))
+    except ValueError:
+        # something went wrong, reset log file
+        return time_remaining, new_line
     return avg_min, last_10
 
 
