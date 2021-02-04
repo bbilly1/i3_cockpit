@@ -9,7 +9,7 @@ LOG_FILE_PATH = "/tmp/battery_status.log"
 def get_acpi():
     """ get acpi data as a sting """
     acpi_raw = subprocess.run(["acpi"], capture_output=True, check=False)
-    acpi_string = acpi_raw.stdout.decode().strip()
+    acpi_string = acpi_raw.stdout.decode().strip().split('\n')[0]
     return acpi_string
 
 
