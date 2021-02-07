@@ -55,6 +55,7 @@ A bunch of simple bash scripts to be called via i3blocks.
 Standalone script that pulls weather data from [openweathermap.org](https://openweathermap.org/) and prints out 
 current temperature and weather. Meant to be used from i3blocks.  
 Icons used to display the current weather condition are from [fontawesome.com](https://fontawesome.com/).
+* on left click: Get three days forecast, use `notify-send` to send message, works best with *dunst* setup.
 
 ### Config:
 Get your free openweathermap API key from [here](https://home.openweathermap.org/api_keys).  

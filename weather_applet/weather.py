@@ -4,7 +4,9 @@
 import os
 import sys
 import configparser
+import subprocess
 from time import sleep
+from datetime import datetime
 
 import requests
 
@@ -69,11 +71,35 @@ def get_data(api_key, lat, lon):
     return celsius_pretty, icon
 
 
+def get_forecast(api_key, lat, lon):
+    """ get next three days forecast """
+    # get data
+    url = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon \
+        + "&units=metric&exclude=current,minutely,hourly,alerts&appid=" + api_key
+    response = requests.get(url, timeout=5)
+    json = response.json()
+    notify_list = []
+    # loop three days
+    for i in json['daily'][1:4]:
+        timestamp = i['dt']
+        date_clean = datetime.fromtimestamp(timestamp).strftime("%a %Y-%m-%d")
+        min_temp = i['temp']['min']
+        max_temp = i['temp']['max']
+        weather = i['weather'][0]['main']
+        weather_desc = i['weather'][0]['description']
+        icon_id = i['weather'][0]['icon']
+        icon = iconlist.get(icon_id)
+        first_line = f'{date_clean} {icon} {weather}'
+        second_line = f'min: {min_temp} max: {max_temp}, {weather_desc}\n'
+        notify_list.append(first_line)
+        notify_list.append(second_line)
+    # output with notify-send
+    message = "\n".join(notify_list)
+    subprocess.call(['notify-send', 'Three days forecast:', message])
+
+
 def main():
     """ main function to run """
-    # get config file path relative to script file
-    config_path = os.path.dirname(sys.argv[0]) + '/config'
-    api_key, lat, lon = get_config(config_path)
     # make the call
     celsius_pretty, icon = get_data(api_key, lat, lon)
     # print three lines for i3blocks
@@ -84,4 +110,13 @@ def main():
 
 # start from here
 if __name__ == '__main__':
+    # get config file path relative to script file
+    config_path = os.path.dirname(sys.argv[0]) + '/config'
+    api_key, lat, lon = get_config(config_path)
+    # check for button clicked
+    env = os.environ.copy()
+    button = env.get('BLOCK_BUTTON', False)
+    if button == '1':
+        get_forecast(api_key, lat, lon)
+    # regular
     main()
