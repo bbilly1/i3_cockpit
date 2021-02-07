@@ -63,6 +63,7 @@ Create a file called *config* in the same directory as the *weather.py* script a
 data from *config.sample*:
 * Replace the dummy *openweathermap_api_key* with your key.
 * Add *lat* and *lon* values with the latitude and longitude values from your location.
+* Add unit of measurement: *metric* or *imperial* to get results in C° or F°.
 
 ### Install:
 None standard Python dependencies:

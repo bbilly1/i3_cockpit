@@ -3,3 +3,4 @@
 openweathermap_api_key = aaaa1111aaaa1111aaaa1111aaaa1111
 lat = 40.71
 lon = -74.00
+unit = metric
