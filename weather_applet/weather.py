@@ -84,14 +84,14 @@ def get_forecast(api_key, lat, lon, unit):
     for i in json['daily'][1:4]:
         timestamp = i['dt']
         date_clean = datetime.fromtimestamp(timestamp).strftime("%a %Y-%m-%d")
-        min_temp = i['temp']['min']
-        max_temp = i['temp']['max']
+        min_temp = round(i['temp']['min'])
+        max_temp = round(i['temp']['max'])
         weather = i['weather'][0]['main']
         weather_desc = i['weather'][0]['description']
         icon_id = i['weather'][0]['icon']
         icon = iconlist.get(icon_id)
         first_line = f'{date_clean} {icon} {weather}'
-        second_line = f'min: {min_temp} max: {max_temp}, {weather_desc}\n'
+        second_line = f'{min_temp}° - {max_temp}°, {weather_desc}\n'
         notify_list.append(first_line)
         notify_list.append(second_line)
     # output with notify-send
