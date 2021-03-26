@@ -34,6 +34,11 @@ A collection of standalone python scripts for the slightly more complicated thin
     * call `cpu.py 1` to get the avg from last min
     * call `cpu.py 5` to get the avg from last 5 min
     * call `cpu.py 15` to get the avg from last 15 min
+* **volume.py**: Now compatible with *pipewire*, parses output of `pactl` to output activ sink and current volume to i3blocks and manages music volume hotkeys.
+    * call `volume.py` without args to output status for i3blocks
+    * call `volume.py vol_up` to increase volume by 5%
+    * call `volume.py vol_down` to decrease volume by 5%
+    * call `volume.py mute` to toggle mute
 
 
 ## i3block_shell
