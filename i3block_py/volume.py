@@ -89,13 +89,13 @@ def print_status(activ_sink):
 
 def mute(activ_sink):
     """ toggle mute of activ sink """
-    sink_id = activ_sink['object.id']
+    sink_id = activ_sink['object.serial']
     subprocess.call(['pactl', 'set-sink-mute', sink_id, 'toggle'])
 
 
 def vol_up(activ_sink):
     """ increase vol in 5% increments """
-    sink_id = activ_sink['object.id']
+    sink_id = activ_sink['object.serial']
     vol = get_vol(activ_sink)
     # if uneven vol level
     if vol % 5 == 0:
@@ -111,7 +111,7 @@ def vol_up(activ_sink):
 
 def vol_down(activ_sink):
     """ decrese vol in 5% increments """
-    sink_id = activ_sink['object.id']
+    sink_id = activ_sink['object.serial']
     vol = get_vol(activ_sink)
     # if uneven vol level
     if vol % 5 == 0:
